@@ -5,8 +5,11 @@
       <excludeFolder url="file://$MODULE_DIR$/day-18-start/.venv" />
       <excludeFolder url="file://$USER_HOME$/PycharmProjects/Pycharm-Projects-100-Days-Code/day-16-project/.venv" />
       <excludeFolder url="file://$USER_HOME$/PycharmProjects/Pycharm-Projects-100-Days-Code/day-17-start/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-19/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/hirst-painting-project/.venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.13 (CoffeeMachine2)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.13 (100-days-of-code)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
