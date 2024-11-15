@@ -1,5 +1,9 @@
 # Pycharm-Projects-100-Days-Code
 
+### Days Completed: 21 🎉 Days Remaining: 79 
+
+___
+
 ## Best Practices
 
 - When using methods you didn't write, use keyword parameters so it is clear what you are passing to the method
