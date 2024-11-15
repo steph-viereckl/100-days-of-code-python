@@ -8,4 +8,15 @@
 - Don't do `from module import *` because it might be confusing where you get items from
 - All method names and variable names should use snake case (`hello_world`)
 - All class names should use Pascal Case (`HelloWorld`)
-- 
+
+## Class Inheritence 
+
+```python
+
+class Fish(Animal):
+
+    def __init__(self):
+        super().__init__()
+```
+
+The `Fish` Class inherits from the `Animal` class. To do this, pass in the `Animal` class to the `Fish` class and include `super().__init__()` in the constructor
