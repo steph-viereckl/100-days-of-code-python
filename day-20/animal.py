@@ -23,5 +23,5 @@ class Fish(Animal):
 
 nemo = Fish()
 nemo.swim()
-nemo.breathe() # Access from super class... and then expand functionality 
+nemo.breathe() # Access from super class... and then expand functionality
 eyes = nemo.num_eyes # Access from super class

@@ -19,13 +19,20 @@ class Snake:
 
     def create_snake(self):
         for position in STARTING_COORDINATES:
-            new_square = Turtle()
-            new_square.penup()
-            new_square.shape("square")
-            new_square.color("white")
-            new_square.setposition(position)
-            self.segments.append(new_square)
+            self.add_segment(position)
 
+
+    def add_segment(self, position):
+        new_square = Turtle()
+        new_square.penup()
+        new_square.shape("square")
+        new_square.color("white")
+        new_square.setposition(position)
+        self.segments.append(new_square)
+
+    def extend(self):
+        # Get the last segment by the last index's position
+        self.add_segment(self.segments[-1].position())
 
     def move(self):
 
