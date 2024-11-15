@@ -1,4 +1,4 @@
-# Pycharm-Projects-100-Days-Code
+# 100 Days of Code (Python)
 
 ### Days Completed: 21 🎉 Days Remaining: 79 
 
