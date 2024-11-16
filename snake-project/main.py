@@ -47,13 +47,6 @@ screen.onkey(snake.right, "Right")
 
 game_is_on = True
 
-number_string = ""
-
-for num in range(1,101):
-    number_string = number_string + " " + str(num)
-
-print(number_string)
-
 while game_is_on:
 
     # Update screen every .1 second
