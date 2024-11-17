@@ -4,6 +4,8 @@ from paddle import Paddle
 from ball import Ball
 import time
 
+# TODO Do some visual clean ups? Change font? 
+
 SCREEN_WIDTH = 1500
 X_COR_WIDTH = int(SCREEN_WIDTH / 2)
 SCREEN_HEIGHT = 1000
@@ -41,7 +43,6 @@ while game_is_on:
     ball.move()
 
     # Hit the ceiling
-    print(f"ball ycor is {ball.ycor()} and top of screen is {Y_COR_HEIGHT - 20}")
     if ball.ycor() == (Y_COR_HEIGHT - 20):
         ball.go_up = False
 
@@ -55,6 +56,7 @@ while game_is_on:
 
         if hit_paddle is True:
             ball.go_right = False  # Change ball direction to go left
+            right_player_score.increase_score()
         else:
             game_is_on = False
             gameboard.game_over()
@@ -65,12 +67,10 @@ while game_is_on:
 
         if hit_paddle is True:
             ball.go_right = True  # Change ball direction to go right
+            left_player_score.increase_score()
         else:
             game_is_on = False
             gameboard.game_over()
-
-
-    # TODO Now that the score is displayed need to update score
 
     # End of While Loop
 

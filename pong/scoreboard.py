@@ -1,8 +1,8 @@
 from turtle import Turtle
 
 ALIGNMENT = "center"
-SCORE_FONT = ("Verdana", 100, "normal")
-GAME_OVER_FONT = ("Verdana", 100, "normal")
+SCORE_FONT = ("Consolas", 100, "normal")
+GAME_OVER_FONT = ("Consolas", 100, "normal")
 GAME_OVER = "GAME OVER"
 
 SOUTH = 270
@@ -39,11 +39,20 @@ class Score(Turtle):
 
     def __init__(self, x_cor_width, y_cor_height):
         super().__init__()
+        self.score = 0
         self.hideturtle()
         self.penup()
         self.color("white")
         self.setposition(x_cor_width * .2, y_cor_height * .7)
-        self.write(align=ALIGNMENT, move=False, arg=f"1", font=SCORE_FONT)
+        self.write(align=ALIGNMENT, move=False, arg=self.score, font=SCORE_FONT)
+
+    def update_score(self):
+        self.write(align=ALIGNMENT, move=False, arg=self.score, font=SCORE_FONT)
+
+    def increase_score(self):
+        self.score += 1
+        self.clear()
+        self.update_score()
 
 # class Scoreboard(Turtle):
 #
