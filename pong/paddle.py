@@ -45,12 +45,16 @@ class Paddle(Turtle):
             segment.setheading(270)
             segment.forward(20)
 
-    # def check_hit(self, ball):
-    #
-    #     #  If the ball is between the paddle's top segment and the bottom segment
-    #     if ball.ycor() >= self.segments[0].ycor() and ball.ycor() <= self.segments[-1].ycor():
-    #         print("hit the right paddle! Change direction")
-    #         ball.go_right = False  # Turn Left
-    #     else:
-    #         print("you lose!")
-    #         game_is_on = False
+    def check_hit(self, ball_ycor):
+
+        print(f'check hit ball ycor: {ball_ycor}')
+        print(f'self.segments[0].ycor(): {self.segments[0].ycor()}')
+        print(f'self.segments[-1].ycor(): {self.segments[-1].ycor()}')
+
+        #  If the ball is between the paddle's top segment and the bottom segment
+        if ball_ycor >= self.segments[0].ycor() and ball_ycor <= self.segments[-1].ycor():
+            print("hit the right paddle! Change direction")
+            return True
+        else:
+            print("you lose!")
+            return False

@@ -1,13 +1,13 @@
 from turtle import Screen
-from unittest.mock import right
-
-from scoreboard import Gameboard, Scoreboard
+from scoreboard import Gameboard, Score
 from paddle import Paddle
 from ball import Ball
 import time
 
 SCREEN_WIDTH = 1500
+X_COR_WIDTH = int(SCREEN_WIDTH / 2)
 SCREEN_HEIGHT = 1000
+Y_COR_HEIGHT = int(SCREEN_HEIGHT / 2)
 RIGHT_PADDLE_X_COR = 700
 LEFT_PADDLE_X_COR = -700
 
@@ -15,14 +15,15 @@ LEFT_PADDLE_X_COR = -700
 screen = Screen()
 screen.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
 screen.bgcolor("black")
-screen.title("Steph's Pong Game")
+screen.title("Stephanie's Pong Game")
 screen.tracer(0) # Turn off tracer
 
-gameboard = Gameboard(SCREEN_HEIGHT) # Setup Striped Line
-scoreboard = Scoreboard(SCREEN_HEIGHT)
+gameboard = Gameboard(Y_COR_HEIGHT) # Setup Striped Line
+left_player_score = Score(-X_COR_WIDTH, Y_COR_HEIGHT)
+right_player_score = Score(X_COR_WIDTH, Y_COR_HEIGHT)
+ball = Ball(Y_COR_HEIGHT)
 right_paddle = Paddle(starting_x_coordinate=RIGHT_PADDLE_X_COR)
 left_paddle = Paddle(starting_x_coordinate=LEFT_PADDLE_X_COR)
-ball = Ball()
 
 screen.listen()
 screen.onkey(right_paddle.up, key="Up")
@@ -36,40 +37,41 @@ while game_is_on:
 
     # Update screen every .1 second
     screen.update()
-    time.sleep(0.1)
+    time.sleep(0.05)
     ball.move()
 
     # Hit the ceiling
-    if ball.ycor() == ((SCREEN_HEIGHT/2) - 20):
+    print(f"ball ycor is {ball.ycor()} and top of screen is {Y_COR_HEIGHT - 20}")
+    if ball.ycor() == (Y_COR_HEIGHT - 20):
         ball.go_up = False
 
     # Hit the floor
-    if ball.ycor() == -((SCREEN_HEIGHT/2) - 20):
+    if ball.ycor() == -1 * Y_COR_HEIGHT + 20:
         ball.go_up = True
 
     if ball.xcor() == RIGHT_PADDLE_X_COR - 20:
 
-        #  If the ball is between the right paddle's top segment and the bottom segment
-        if ball.ycor() >= right_paddle.segments[0].ycor() and ball.ycor() <= right_paddle.segments[-1].ycor():
-            print("hit the right paddle! Change direction")
-            ball.go_right = False  # Turn Left
+        hit_paddle = right_paddle.check_hit(ball_ycor = ball.ycor())
+
+        if hit_paddle is True:
+            ball.go_right = False  # Change ball direction to go left
         else:
-            print("you lose!")
             game_is_on = False
+            gameboard.game_over()
 
-    if ball.xcor() == LEFT_PADDLE_X_COR + 20:
+    elif ball.xcor() == LEFT_PADDLE_X_COR + 20:
 
-        #  If the ball is between the left paddle's top segment and the bottom segment
-        if ball.ycor() >= right_paddle.segments[0].ycor() and ball.ycor() <= right_paddle.segments[-1].ycor():
-            print("hit the right paddle! Change direction")
-            ball.go_right = False  # Turn Left
+        hit_paddle = left_paddle.check_hit(ball_ycor=ball.ycor())
+
+        if hit_paddle is True:
+            ball.go_right = True  # Change ball direction to go right
         else:
-            print("you lose!")
             game_is_on = False
-
-# For tomorrow, trying to figure out the best way to organize this so it is less code in the main class
-# Should i put this in the paddle or the ball class maybe?
+            gameboard.game_over()
 
 
+    # TODO Now that the score is displayed need to update score
+
+    # End of While Loop
 
 screen.exitonclick()

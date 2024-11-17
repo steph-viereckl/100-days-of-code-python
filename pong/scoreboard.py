@@ -1,18 +1,19 @@
 from turtle import Turtle
 
 ALIGNMENT = "center"
-FONT = ("Verdana", 30, "normal")
+SCORE_FONT = ("Verdana", 100, "normal")
+GAME_OVER_FONT = ("Verdana", 100, "normal")
 GAME_OVER = "GAME OVER"
 
 SOUTH = 270
 
 class Gameboard(Turtle):
     """Dotted Lines Down the center of the board"""
-    def __init__(self, screen_height):
+    def __init__(self, y_cor_height):
         super().__init__()
         self.penup()
         self.shapesize(.5)
-        self.top_of_screen = screen_height/2
+        self.top_of_screen = y_cor_height
         self.bottom_of_screen = -1 * self.top_of_screen
         self.goto(0, self.top_of_screen)
         self.shape("square")
@@ -30,14 +31,28 @@ class Gameboard(Turtle):
 
             self.forward(30)
 
-class Scoreboard(Turtle):
+    def game_over(self):
+        self.home()
+        self.write(arg=GAME_OVER, font=GAME_OVER_FONT, align=ALIGNMENT)
 
-    def __init__(self, screen_height):
+class Score(Turtle):
+
+    def __init__(self, x_cor_width, y_cor_height):
         super().__init__()
         self.hideturtle()
         self.penup()
         self.color("white")
-        self.setposition(0, (screen_height/2)*.9)
-        self.write(align=ALIGNMENT, move=False, arg=f"TEST TITLE", font=FONT)
+        self.setposition(x_cor_width * .2, y_cor_height * .7)
+        self.write(align=ALIGNMENT, move=False, arg=f"1", font=SCORE_FONT)
+
+# class Scoreboard(Turtle):
+#
+#     def __init__(self, y_cor_height):
+#         super().__init__()
+#         self.hideturtle()
+#         self.penup()
+#         self.color("white")
+#         self.setposition(0, y_cor_height * .9)
+#         self.write(align=ALIGNMENT, move=False, arg=f"TEST TITLE", font=FONT)
 
 
