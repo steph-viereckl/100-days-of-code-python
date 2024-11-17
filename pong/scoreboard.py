@@ -1,8 +1,8 @@
 from turtle import Turtle
 
 ALIGNMENT = "center"
-SCORE_FONT = ("Consolas", 100, "normal")
-GAME_OVER_FONT = ("Consolas", 100, "normal")
+SCORE_FONT = ("System", 100, "normal")
+GAME_OVER_FONT = ("Roman", 100, "normal")
 GAME_OVER = "GAME OVER"
 
 SOUTH = 270

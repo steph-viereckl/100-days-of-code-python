@@ -4,7 +4,7 @@ from paddle import Paddle
 from ball import Ball
 import time
 
-# TODO Do some visual clean ups? Change font? 
+# TODO Do some visual clean ups? Change font?
 
 SCREEN_WIDTH = 1500
 X_COR_WIDTH = int(SCREEN_WIDTH / 2)
@@ -12,6 +12,7 @@ SCREEN_HEIGHT = 1000
 Y_COR_HEIGHT = int(SCREEN_HEIGHT / 2)
 RIGHT_PADDLE_X_COR = 700
 LEFT_PADDLE_X_COR = -700
+SLEEP_TIMER = 0.05
 
 # Setup screen
 screen = Screen()
@@ -39,7 +40,7 @@ while game_is_on:
 
     # Update screen every .1 second
     screen.update()
-    time.sleep(0.05)
+    time.sleep(SLEEP_TIMER)
     ball.move()
 
     # Hit the ceiling
@@ -52,24 +53,30 @@ while game_is_on:
 
     if ball.xcor() == RIGHT_PADDLE_X_COR - 20:
 
-        hit_paddle = right_paddle.check_hit(ball_ycor = ball.ycor())
-
-        if hit_paddle is True:
+        if ball.distance(right_paddle) < 60:
             ball.go_right = False  # Change ball direction to go left
             right_player_score.increase_score()
         else:
             game_is_on = False
+            # Keep ball moving even though we know it hit the wall
+            for num in range(5):
+                screen.update()
+                time.sleep(SLEEP_TIMER)
+                ball.move()
             gameboard.game_over()
 
     elif ball.xcor() == LEFT_PADDLE_X_COR + 20:
 
-        hit_paddle = left_paddle.check_hit(ball_ycor=ball.ycor())
-
-        if hit_paddle is True:
-            ball.go_right = True  # Change ball direction to go right
+        if ball.distance(left_paddle) < 60:
+            ball.go_right = True  # Change ball direction to go left
             left_player_score.increase_score()
         else:
             game_is_on = False
+            # Keep ball moving even though we know it hit the wall
+            for num in range(5):
+                screen.update()
+                time.sleep(SLEEP_TIMER)
+                ball.move()
             gameboard.game_over()
 
     # End of While Loop
