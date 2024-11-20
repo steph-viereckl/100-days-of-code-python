@@ -28,23 +28,23 @@ screen.onkey(turtle.move_down, key="Down")
 game_is_on = True
 while game_is_on:
 
-    time.sleep(0.1)
+    time.sleep(.1)
     screen.update()
 
-    if turtle.ycor() == 300:
-        print("Hit the top!")
+    if turtle.ycor() > 300:
         scoreboard.level += 1
         scoreboard.update_score()
         turtle.reset()
 
-    car_manager.move_cars() 
+    car_manager.generate_car(300)
+    car_manager.move_cars()
 
+    for car in car_manager.cars:
 
+        # TODO I think that this can be improved so it is more specific
+        if car.distance(turtle) < 20:
 
-
-
-
-
-
+            scoreboard.game_over()
+            game_is_on = False
 
 screen.exitonclick()
