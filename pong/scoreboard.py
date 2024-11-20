@@ -3,6 +3,7 @@ from turtle import Turtle
 ALIGNMENT = "center"
 SCORE_FONT = ("System", 100, "normal")
 GAME_OVER_FONT = ("Roman", 100, "normal")
+COUNTDOWN_FONT = ("Roman", 40, "normal")
 GAME_OVER = "GAME OVER"
 
 SOUTH = 270
@@ -20,6 +21,7 @@ class Gameboard(Turtle):
         self.color("white")
         self.speed("slowest")
         self.setheading(SOUTH)
+        self.paused = False
 
         # Draw dotted line from top to bottom of screen
         while self.ycor() > self.bottom_of_screen:
@@ -30,10 +32,6 @@ class Gameboard(Turtle):
                 self.forward(10)
 
             self.forward(30)
-
-    def game_over(self):
-        self.home()
-        self.write(arg=GAME_OVER, font=GAME_OVER_FONT, align=ALIGNMENT)
 
 class Score(Turtle):
 
@@ -54,14 +52,6 @@ class Score(Turtle):
         self.clear()
         self.update_score()
 
-# class Scoreboard(Turtle):
-#
-#     def __init__(self, y_cor_height):
-#         super().__init__()
-#         self.hideturtle()
-#         self.penup()
-#         self.color("white")
-#         self.setposition(0, y_cor_height * .9)
-#         self.write(align=ALIGNMENT, move=False, arg=f"TEST TITLE", font=FONT)
+
 
 

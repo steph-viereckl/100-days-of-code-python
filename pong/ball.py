@@ -1,7 +1,7 @@
 from turtle import Turtle
 import random
 
-STARTING_Y_COR = [-100, -50, 0, 50, 100]
+STARTING_Y_COR = [-150,-100, -50, 0, 50, 100, 150]
 
 class Ball(Turtle):
 
@@ -31,5 +31,11 @@ class Ball(Turtle):
             new_y = self.ycor() - 10
 
         self.goto(new_x, new_y)
+
+    def reset(self):
+        self.go_up = random.choice([True, False])
+        self.go_right = random.choice([True, False])
+        self.goto(0, random.choice(STARTING_Y_COR))
+
 
 

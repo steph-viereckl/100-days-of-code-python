@@ -22,6 +22,7 @@ screen.title("Stephanie's Pong Game")
 screen.tracer(0) # Turn off tracer
 
 gameboard = Gameboard(Y_COR_HEIGHT) # Setup Striped Line
+
 left_player_score = Score(-X_COR_WIDTH, Y_COR_HEIGHT)
 right_player_score = Score(X_COR_WIDTH, Y_COR_HEIGHT)
 ball = Ball(Y_COR_HEIGHT)
@@ -55,29 +56,30 @@ while game_is_on:
 
         if ball.distance(right_paddle) < 60:
             ball.go_right = False  # Change ball direction to go left
-            right_player_score.increase_score()
         else:
-            game_is_on = False
             # Keep ball moving even though we know it hit the wall
             for num in range(5):
                 screen.update()
                 time.sleep(SLEEP_TIMER)
                 ball.move()
-            gameboard.game_over()
+
+            left_player_score.increase_score()
+            ball.reset()
 
     elif ball.xcor() == LEFT_PADDLE_X_COR + 20:
 
         if ball.distance(left_paddle) < 60:
             ball.go_right = True  # Change ball direction to go left
-            left_player_score.increase_score()
+
         else:
-            game_is_on = False
             # Keep ball moving even though we know it hit the wall
             for num in range(5):
                 screen.update()
                 time.sleep(SLEEP_TIMER)
                 ball.move()
-            gameboard.game_over()
+
+            right_player_score.increase_score()
+            ball.reset()
 
     # End of While Loop
 
