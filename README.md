@@ -24,3 +24,23 @@ class Fish(Animal):
 ```
 
 The `Fish` Class inherits from the `Animal` class. To do this, pass in the `Animal` class to the `Fish` class and include `super().__init__()` in the constructor
+
+
+## File Paths
+
+### Absolute File Path
+This is the file path starting from the root directory `/`
+
+`/Stephanie/Documents/GitHub/blah-blah-blah`
+
+### Relative File Path
+This is the file path from the working directory, the location from which we are currently working from. To indicate the file path of the current folder, use a `./`
+
+### Moving Directories
+To move up in a directory use a dot `.`
+
+For example, to move up a folder and navigate into Desired Folder you would use `../Desired_Folder/file.txt`
+
+To move up 2 folders, do `../../Desired_Folder/file.txt`
+
+To reference something in the same folder, you can do `./file.txt` or shorthand of `file.txt`
