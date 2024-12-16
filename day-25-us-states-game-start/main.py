@@ -27,8 +27,21 @@ while len(found_states) < 50:
     # Find the row where the state is equal to user's input
     selected_state = us_state_data_frame[us_state_data_frame["state"] == user_input]
 
+    # Break out of while loop and close game
+    if user_input == "Exit":
+
+        # Create "states_to_learn.csv" that includes all states the user has not guessed
+        states_to_learn = []
+        for state in us_state_data_frame.state:
+            if state not in found_states:
+                states_to_learn.append(state)
+
+        states_to_learn_df = pandas.DataFrame(states_to_learn, columns=["state"])
+        states_to_learn_df.to_csv("states_to_learn.csv")
+        break
+
     # Check if it is a valid entry (data frame will be empty if there is no matching state)
-    if selected_state.empty:
+    elif selected_state.empty:
         prompt = "Not a valid guess! Guess Again."
 
     # Check if state has already been guessed
