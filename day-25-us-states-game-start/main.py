@@ -31,10 +31,11 @@ while len(found_states) < 50:
     if user_input == "Exit":
 
         # Create "states_to_learn.csv" that includes all states the user has not guessed
-        states_to_learn = []
-        for state in us_state_data_frame.state:
-            if state not in found_states:
-                states_to_learn.append(state)
+
+        states_to_learn = [state for state in us_state_data_frame.state if state not in found_states]
+        # for state in us_state_data_frame.state:
+        #     if state not in found_states:
+        #         states_to_learn.append(state)
 
         states_to_learn_df = pandas.DataFrame(states_to_learn, columns=["state"])
         states_to_learn_df.to_csv("states_to_learn.csv")
