@@ -8,15 +8,22 @@ import pandas
 
 user_input = input("What word do you need to spell with the NATO alphabet?").upper()
 split_word = list(user_input)
-print(split_word)
+# print(split_word)
 nato_data_frame = pandas.read_csv("nato_phonetic_alphabet.csv")
-print(nato_data_frame)
-nato_list = []
+# print(nato_data_frame)
+
+# Convert data frame into dictionary using dictionary comprehension
+nato_dict = {row.letter:row.code for (index, row) in nato_data_frame.iterrows()}
+
+# Convert data frame into dictionary using for loop
+# for (index, row) in nato_data_frame.iterrows():
+#     nato_dict[row.letter] = row.code
 
 return_list = []
 
 for letter in split_word:
-    row = nato_data_frame[nato_data_frame.letter == letter]
-    return_list.append(row.code)
+    if letter in nato_dict:
+        return_list.append(nato_dict[letter])
 
-print(return_list)
+# Return inputted word in a list format i.e. Hi = ["Hotel", "India"]
+print(f"Nato Codes: {return_list}")
