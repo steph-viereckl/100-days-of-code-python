@@ -50,3 +50,39 @@ print(cap_names)
 
 student_scores = {student: random.randint(1, 100) for student in names}
 print(student_scores)
+
+passing_scores = {student: score for (student, score) in student_scores.items() if score > 60}
+print(student_scores.items())
+print(passing_scores)
+
+# Using pandas and dictionary comprehnsion on data frams
+# Remember, to loop through dictionary:
+student_dict = {
+    "student": ["Ron", "Harry", "Hermoine"],
+    "score": [78, 79, 100]
+}
+
+for (key, value) in student_dict.items():
+    print(key)
+    print(value)
+
+import pandas
+
+student_data_frame = pandas.DataFrame(student_dict)
+print(student_data_frame)
+
+# Loop through data frame
+for (key, value) in student_data_frame.items():
+    # This will tell you the name of the column
+    print(key)
+    # All the data in each column
+    print(value)
+
+for (index, row) in student_data_frame.iterrows():
+    # Number value
+    print(index)
+    # Row is student: Hermoine, score: 100
+    print(row)
+    # Print out just the student
+    print(row.student)
+    print(row.score)
