@@ -7,6 +7,7 @@ def button_click():
 window = Tk()
 window.title("My first GUI Program")
 window.minsize(width=500, height=300)
+window.config(padx=20, pady=20)
 
 # Label
 label = Label(text="I AM LABEL", font=("Arial", 24, "bold"))
