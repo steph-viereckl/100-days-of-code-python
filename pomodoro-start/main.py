@@ -11,10 +11,14 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
+MILLISECONDS = 100
+SECONDS_IN_MIN = 1
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
+
 reps = 0
+checkmarks = ""
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
@@ -27,22 +31,26 @@ def start_timer():
     global reps
     reps += 1
 
-    work_session_seconds = WORK_MIN * 60
-    short_break_seconds = SHORT_BREAK_MIN * 60
-    long_break_seconds = LONG_BREAK_MIN * 60
+    work_session_seconds = WORK_MIN * SECONDS_IN_MIN
+    short_break_seconds = SHORT_BREAK_MIN * SECONDS_IN_MIN
+    long_break_seconds = LONG_BREAK_MIN * SECONDS_IN_MIN
 
     if reps % 2 == 1:
         count_down(work_session_seconds)
+        timer_label.config(text="Work Work Work", fg=GREEN)
     elif reps <= 6:
         count_down(short_break_seconds)
+        timer_label.config(text="Short break", fg=PINK)
     else:
         count_down(long_break_seconds)
+        timer_label.config(text="Long break", fg=RED)
+
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 
 def count_down(count):
-
+    global checkmarks
     minutes = math.floor(count / 60)
     seconds = count % 60
 
@@ -56,7 +64,12 @@ def count_down(count):
     canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
 
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        window.after(MILLISECONDS, count_down, count - 1)
+    else:
+        start_timer()
+        if reps % 2 == 0:
+            checkmarks += "✓"
+            counter_label.config(text=checkmarks)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -93,7 +106,7 @@ reset_button = Button(text="Reset", command=reset_timer, highlightbackground=YEL
 reset_button.grid(column=2, row=2)
 
 # Checkmark Counter
-counter_label = Label(text="✓", bg=YELLOW, fg=GREEN, font=(FONT_NAME, 30, "normal"))
+counter_label = Label(bg=YELLOW, fg=GREEN, font=(FONT_NAME, 30, "normal"))
 counter_label.grid(column=1, row=3)
 
 window.mainloop()
