@@ -1,3 +1,4 @@
+from tabnanny import check
 from tkinter import *
 import math
 
@@ -11,19 +12,28 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-MILLISECONDS = 100
-SECONDS_IN_MIN = 1
+MILLISECONDS = 1000
+SECONDS_IN_MIN = 60
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 
 reps = 0
 checkmarks = ""
+timer = None
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
 def reset_timer():
-    pass
+    global reps
+    global checkmarks
+
+    window.after_cancel(timer)
+
+    reps = 0
+    checkmarks = ""
+    canvas.itemconfig(timer_text, text="00:00")
+    timer_label.config(text="Timer", fg=GREEN)
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
@@ -64,7 +74,8 @@ def count_down(count):
     canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
 
     if count > 0:
-        window.after(MILLISECONDS, count_down, count - 1)
+        global timer
+        timer = window.after(MILLISECONDS, count_down, count - 1)
     else:
         start_timer()
         if reps % 2 == 0:
