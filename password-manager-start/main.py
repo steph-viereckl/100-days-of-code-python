@@ -1,26 +1,67 @@
 from tkinter import *
+# This is not a class in tkinter, it's another module
+from tkinter import messagebox
+import random
 
 DEFAULT_EMAIL = "email@email.com"
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_password():
-    pass
+
+    #Password Generator Project
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    nr_letters = random.randint(8, 10)
+    nr_symbols = random.randint(2, 4)
+    nr_numbers = random.randint(2, 4)
+
+    password_list = []
+
+    password_list += [random.choice(letters) for i in range(nr_letters)]
+    password_list += [random.choice(numbers) for i in range(nr_numbers)]
+    password_list += [random.choice(symbols) for i in range(nr_symbols)]
+
+    random.shuffle(password_list)
+
+    password = ""
+    for char in password_list:
+      password += char
+
+    password_input.delete(0, END)
+    password_input.insert(0, password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
 
-    new_password = f"{website_input.get()} | {email_input.get()} | {password_input.get()}\n"
+    website = website_input.get()
+    email = email_input.get()
+    password = password_input.get()
 
-    # mode = "a" is append (add to it)
-    with open("password_data.txt", mode="a") as file:
-        file.write(new_password)
+    if website == "" or email == "" or password == "":
+        messagebox.showwarning(title="Invalid Entry", message="One or more fields is empty. Please try again.")
+    else:
 
-    website_input.delete(0, END)
-    email_input.delete(0, END)
-    email_input.insert(0, DEFAULT_EMAIL)
-    password_input.delete(0, END)
+        valid = messagebox.askokcancel(title=website, message=f"These are the details entered:\n\n"
+                                                      f"Email: {email}\n"
+                                                      f"Password: {password}\n\n"
+                                                      f"Click OK to save.")
+
+        if valid:
+
+            new_entry = f"{website} | {email} | {password}\n"
+
+            # mode = "a" is append (add to it)
+            with open("password_data.txt", mode="a") as file:
+                file.write(new_entry)
+
+            website_input.delete(0, END)
+            email_input.delete(0, END)
+            email_input.insert(0, DEFAULT_EMAIL)
+            password_input.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
