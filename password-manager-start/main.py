@@ -3,8 +3,34 @@ from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
+import json
 
 DEFAULT_EMAIL = "email@email.com"
+
+# ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+def find_password():
+
+    website = website_input.get()
+
+    try:
+        with open("password_data.json", mode="r") as data_file:
+
+            # Convert existing JSON into pictionary
+            password_dict = json.load(data_file)
+
+            try:
+                password_entry = password_dict[website]
+                print(f"password_entry: {password_entry}")
+            except KeyError:
+                messagebox.showwarning(title=f"Website Not Found", message=f"No password found for {website}")
+            else:
+                messagebox.showinfo(title=f"{website}", message=f"{website}\n"
+                                                                f"Email: {password_entry["email"]}\n"
+                                                                f"Password: {password_entry["password"]}")
+
+    except FileNotFoundError:
+        messagebox.showwarning(title=f"Password File Empty", message=f"No passwords have been added yet.")
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -36,24 +62,46 @@ def save():
     website = website_input.get()
     email = email_input.get()
     password = password_input.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": password
+        }
+    }
 
     if website == "" or email == "" or password == "":
+
         messagebox.showwarning(title="Invalid Entry", message="One or more fields is empty. Please try again.")
+
     else:
+        new_entry = f"{website} | {email} | {password}\n"
 
-        valid = messagebox.askokcancel(title=website, message=f"These are the details entered:\n\n"
-                                                      f"Email: {email}\n"
-                                                      f"Password: {password}\n\n"
-                                                      f"Click OK to save.")
+        # mode = "a" is append (add to it)
+        # mode = "w" is to write (if file doesn't exist, it will create it)
+        # mode = "r" is read mode
 
-        if valid:
+        try:
+            with open("password_data.json", mode="r") as data_file:
 
-            new_entry = f"{website} | {email} | {password}\n"
+                # Read existing JSON file
+                # load() takes json and converts it into a python dictionary
+                data = json.load(data_file)
 
-            # mode = "a" is append (add to it)
-            with open("password_data.txt", mode="a") as file:
-                file.write(new_entry)
+        except FileNotFoundError as message:
 
+            with open("password_data.json", mode="w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+
+        else:
+
+            # Update old data with new data
+            data.update(new_data)
+
+            with open("password_data.json", mode="w") as data_file:
+                json.dump(data, data_file, indent=4)
+
+        finally:
+            # Reset form
             website_input.delete(0, END)
             email_input.delete(0, END)
             email_input.insert(0, DEFAULT_EMAIL)
@@ -80,9 +128,13 @@ website_label = Label(text="Website:")
 website_label.grid(column=0, row=1)
 
 # Website Input
-website_input = Entry(width=39)
+website_input = Entry(width=21)
 website_input.focus()
-website_input.grid(column=1, row=1, columnspan=2)
+website_input.grid(column=1, row=1)
+
+# Website Search Button
+search_button = Button(text="Search", command=find_password, width=13)
+search_button.grid(column=2, row=1)
 
 # Email/Username Label
 email_label = Label(text="Email/Username:")
