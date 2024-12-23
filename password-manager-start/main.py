@@ -19,18 +19,22 @@ def find_password():
             # Convert existing JSON into pictionary
             password_dict = json.load(data_file)
 
-            try:
-                password_entry = password_dict[website]
-                print(f"password_entry: {password_entry}")
-            except KeyError:
-                messagebox.showwarning(title=f"Website Not Found", message=f"No password found for {website}")
-            else:
-                messagebox.showinfo(title=f"{website}", message=f"{website}\n"
-                                                                f"Email: {password_entry["email"]}\n"
-                                                                f"Password: {password_entry["password"]}")
-
     except FileNotFoundError:
         messagebox.showwarning(title=f"Password File Empty", message=f"No passwords have been added yet.")
+
+    else:
+
+        # Preference is to use if/else to catch issues. But if you can't easily do an if/else.. an exception is better
+        # Exceptions should be occasional.
+        try:
+            password_entry = password_dict[website]
+            print(f"password_entry: {password_entry}")
+        except KeyError:
+            messagebox.showwarning(title=f"Website Not Found", message=f"No password found for {website}")
+        else:
+            messagebox.showinfo(title=f"{website}", message=f"{website}\n"
+                                                            f"Email: {password_entry["email"]}\n"
+                                                            f"Password: {password_entry["password"]}")
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
