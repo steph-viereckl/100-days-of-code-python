@@ -1,7 +1,8 @@
 from tkinter import *
 # This is not a class in tkinter, it's another module
 from tkinter import messagebox
-import random
+from random import choice, randint, shuffle
+import pyperclip
 
 DEFAULT_EMAIL = "email@email.com"
 
@@ -13,22 +14,17 @@ def generate_password():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
-
-    nr_letters = random.randint(8, 10)
-    nr_symbols = random.randint(2, 4)
-    nr_numbers = random.randint(2, 4)
-
     password_list = []
 
-    password_list += [random.choice(letters) for i in range(nr_letters)]
-    password_list += [random.choice(numbers) for i in range(nr_numbers)]
-    password_list += [random.choice(symbols) for i in range(nr_symbols)]
+    password_list += [choice(letters) for i in range(randint(8, 10))]
+    password_list += [choice(numbers) for i in range(randint(2, 4))]
+    password_list += [choice(symbols) for i in range(randint(2, 4))]
 
-    random.shuffle(password_list)
+    shuffle(password_list)
 
-    password = ""
-    for char in password_list:
-      password += char
+    password = "".join(password_list)
+
+    pyperclip.copy(password)
 
     password_input.delete(0, END)
     password_input.insert(0, password)
