@@ -19,6 +19,8 @@ def mark_correct():
     global word_data_frame
     global word_dict
 
+    window.after_cancel(timer)
+
     # Remove the current word from the data frame
     word_data_frame = word_data_frame[word_data_frame["French"] != current_words["French"]]
     # Update words to learn CSV

@@ -1,89 +1,87 @@
-,Unnamed: 0.3,Unnamed: 0.2,Unnamed: 0.1,Unnamed: 0,French,English
-0,0,0,0,0,partie,part
-1,1,1,1,1,histoire,history
-2,2,2,2,2,chercher,search
-3,3,3,3,3,seulement,only
-4,4,4,4,4,police,police
-5,5,5,5,5,pensais,thought
-6,6,6,6,6,aide,help
-7,7,7,7,7,demande,request
-8,8,8,8,8,genre,kind
-9,9,9,9,9,mois,month
-10,10,10,10,10,frère,brother
-11,11,11,11,11,laisser,let
-12,12,12,12,12,car,because
-13,13,13,13,13,mettre,to put
-14,14,14,14,14,aucun,no
-15,15,15,15,15,laisse,leash
-16,16,16,16,16,eux,them
-17,17,17,17,17,ville,city
-18,18,18,18,18,chaque,each
-19,19,19,19,19,parlé,speak
-20,20,20,20,20,arrivé,come
-22,22,22,22,22,bébé,baby
-23,23,23,23,23,longtemps,long time
-24,24,24,24,24,heures,hours
-25,25,25,25,25,vont,will
-26,26,26,27,27,revoir,meet again
-27,27,27,28,28,aucune,any
-28,28,28,29,29,place,square
-29,29,29,30,30,parle,speak
-30,30,30,31,31,compris,understood
-31,31,31,32,32,savais,knew
-32,32,32,33,33,étaient,were
-33,33,33,34,34,attention,Warning
-34,34,34,35,35,voici,here is
-35,35,35,36,36,pourrais,could
-36,36,36,38,38,donner,give
-37,37,37,39,39,type,type
-38,38,38,40,40,leurs,their
-39,39,39,41,41,donné,given
-40,40,40,42,42,train,train
-41,41,41,43,43,corps,body
-42,42,42,44,44,endroit,place
-43,43,43,45,45,yeux,eyes
-44,44,44,46,46,façon,way
-45,45,45,47,47,écoute,listen
-46,46,46,48,48,dont,whose
-47,47,47,49,49,trouve,find
-48,48,48,50,50,premier,first
-49,49,49,51,51,perdu,lost
-50,50,50,52,52,main,hand
-51,51,51,53,53,première,first
-52,52,52,54,54,côté,side
-53,53,53,55,55,pouvoir,power
-54,54,54,56,56,vieux,old
-55,55,55,57,57,sois,be
-56,56,56,58,58,tiens,here
-57,57,57,59,59,matin,morning
-58,58,58,60,60,tellement,so much
-59,60,60,62,62,point,point
-60,61,61,63,63,venu,came
-61,63,63,65,65,pardon,sorry
-62,64,64,66,66,venez,come
-63,65,65,67,67,devant,in front of
-64,66,66,68,68,vers,towards
-65,67,67,69,69,minutes,minutes
-66,68,69,72,72,mis,placed
-67,69,70,73,73,belle,beautiful
-68,70,71,75,75,aimerais,would like to
-69,71,72,77,77,mari,husband
-70,72,73,78,78,cause,cause
-71,73,74,79,79,enfin,finally
-72,74,75,80,80,espère,hope
-73,75,76,82,82,attendez,Wait
-74,76,77,83,83,parti,left
-75,77,78,84,84,nouvelle,new
-76,78,79,86,86,arrêter,Stop
-77,79,80,87,87,dirait,would say
-78,80,81,90,90,donne,given
-79,81,82,91,91,loin,far
-80,82,83,92,92,fin,end
-81,83,84,93,93,croire,believe
-82,84,85,94,94,chérie,sweetheart
-83,85,86,95,95,gros,large
-84,86,87,96,96,plutôt,rather
-85,87,88,97,97,aura,will have
-86,88,89,98,98,filles,girls
-87,89,90,99,99,jouer,to play
-88,90,91,100,100,bureau,office
+,Unnamed: 0.4,Unnamed: 0.3,Unnamed: 0.2,Unnamed: 0.1,Unnamed: 0,French,English
+0,0,0,0,0,0,partie,part
+1,1,1,1,1,1,histoire,history
+2,2,2,2,2,2,chercher,search
+3,3,3,3,3,3,seulement,only
+4,4,4,4,4,4,police,police
+5,5,5,5,5,5,pensais,thought
+6,6,6,6,6,6,aide,help
+7,7,7,7,7,7,demande,request
+8,8,8,8,8,8,genre,kind
+9,9,9,9,9,9,mois,month
+10,10,10,10,10,10,frère,brother
+11,11,11,11,11,11,laisser,let
+12,12,12,12,12,12,car,because
+13,13,13,13,13,13,mettre,to put
+14,14,14,14,14,14,aucun,no
+15,15,15,15,15,15,laisse,leash
+16,16,16,16,16,16,eux,them
+17,17,17,17,17,17,ville,city
+18,18,18,18,18,18,chaque,each
+19,19,19,19,19,19,parlé,speak
+20,20,20,20,20,20,arrivé,come
+21,22,22,22,22,22,bébé,baby
+22,23,23,23,23,23,longtemps,long time
+23,24,24,24,24,24,heures,hours
+24,25,25,25,25,25,vont,will
+25,26,26,26,27,27,revoir,meet again
+26,27,27,27,28,28,aucune,any
+27,28,28,28,29,29,place,square
+28,29,29,29,30,30,parle,speak
+29,30,30,30,31,31,compris,understood
+30,31,31,31,32,32,savais,knew
+31,32,32,32,33,33,étaient,were
+32,33,33,33,34,34,attention,Warning
+33,34,34,34,35,35,voici,here is
+34,35,35,35,36,36,pourrais,could
+35,36,36,36,38,38,donner,give
+36,37,37,37,39,39,type,type
+37,38,38,38,40,40,leurs,their
+38,39,39,39,41,41,donné,given
+39,40,40,40,42,42,train,train
+40,41,41,41,43,43,corps,body
+41,42,42,42,44,44,endroit,place
+42,43,43,43,45,45,yeux,eyes
+43,44,44,44,46,46,façon,way
+44,45,45,45,47,47,écoute,listen
+45,46,46,46,48,48,dont,whose
+46,47,47,47,49,49,trouve,find
+47,48,48,48,50,50,premier,first
+48,49,49,49,51,51,perdu,lost
+49,50,50,50,52,52,main,hand
+50,51,51,51,53,53,première,first
+51,52,52,52,54,54,côté,side
+52,53,53,53,55,55,pouvoir,power
+53,54,54,54,56,56,vieux,old
+54,55,55,55,57,57,sois,be
+55,56,56,56,58,58,tiens,here
+56,57,57,57,59,59,matin,morning
+57,58,58,58,60,60,tellement,so much
+58,59,60,60,62,62,point,point
+59,60,61,61,63,63,venu,came
+60,61,63,63,65,65,pardon,sorry
+61,62,64,64,66,66,venez,come
+62,63,65,65,67,67,devant,in front of
+63,64,66,66,68,68,vers,towards
+64,65,67,67,69,69,minutes,minutes
+65,66,68,69,72,72,mis,placed
+66,67,69,70,73,73,belle,beautiful
+67,68,70,71,75,75,aimerais,would like to
+68,69,71,72,77,77,mari,husband
+69,70,72,73,78,78,cause,cause
+70,71,73,74,79,79,enfin,finally
+71,72,74,75,80,80,espère,hope
+72,73,75,76,82,82,attendez,Wait
+73,74,76,77,83,83,parti,left
+74,75,77,78,84,84,nouvelle,new
+75,76,78,79,86,86,arrêter,Stop
+76,77,79,80,87,87,dirait,would say
+78,79,81,82,91,91,loin,far
+79,80,82,83,92,92,fin,end
+80,81,83,84,93,93,croire,believe
+81,82,84,85,94,94,chérie,sweetheart
+82,83,85,86,95,95,gros,large
+83,84,86,87,96,96,plutôt,rather
+84,85,87,88,97,97,aura,will have
+85,86,88,89,98,98,filles,girls
+86,87,89,90,99,99,jouer,to play
