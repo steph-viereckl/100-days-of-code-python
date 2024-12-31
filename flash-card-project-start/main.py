@@ -11,67 +11,65 @@ is_front = True
 ######################## Functions ########################
 
 def mark_incorrect():
-    pass
+
+    # Cancel current timer (and a new one will start in count down)
+    window.after_cancel(timer)
+    count_down(show_front=True)
 
 def mark_correct():
 
-    print("Mark Correct")
     global word_data_frame
     global word_dict
-
-    window.after_cancel(timer)
 
     # Remove the current word from the data frame
     word_data_frame = word_data_frame[word_data_frame["French"] != current_words["French"]]
     # Update words to learn CSV
-    word_data_frame.to_csv("words_to_learn.csv")
+    word_data_frame.to_csv("words_to_learn.csv", index=False)
     # Update the list that is being used show the words
     word_dict = word_data_frame.to_dict(orient="records")
 
+    # Cancel current timer (and a new one will start in count down)
+    window.after_cancel(timer)
     count_down(show_front=True)
 
 def show_front_card():
-    global current_words
-    current_words = random.choice(word_dict)
     canvas.itemconfig(canvas_img, image=card_front_img)
     canvas.itemconfig(canvas_title, text="French", fill="black")
     canvas.itemconfig(canvas_word, text=current_words["French"], fill="black")
 
 def show_back_card():
-
     canvas.itemconfig(canvas_img, image=card_back_img)
     canvas.itemconfig(canvas_title, text="English", fill="white")
     canvas.itemconfig(canvas_word, text=current_words["English"], fill="white")
 
 def count_down(show_front):
 
-    print(f"In count down showfront = {show_front}")
+    global timer, current_words
 
     if show_front:
+        # Reset current word
+        current_words = random.choice(word_dict)
+
         show_front_card()
     else:
         show_back_card()
 
-    global timer
     timer = window.after(MILLISECONDS, count_down, not show_front)
 
 ######################## Program Start ########################
 
 # Read CSV File
 try:
-    print('Set the words using the words to learn csv')
-    word_data_frame = pandas.read_csv("words_to_learn.csv")
+    words_to_learn_df = pandas.read_csv("words_to_learn.csv")
 
 # The first time this program is run we don't have the words to learn file
 except FileNotFoundError:
     print('File not found')
     word_data_frame = pandas.read_csv("data/french_words.csv")
-    word_data_frame.to_csv("words_to_learn.csv")
-
-finally:
-    print('Finally')
+    word_data_frame.to_csv("words_to_learn.csv", index=False)
     word_dict = word_data_frame.to_dict(orient="records")
-
+else:
+    word_dict = words_to_learn_df.to_dict(orient="records")
 
 # Window
 window = Tk()
@@ -89,16 +87,6 @@ canvas_word = canvas.create_text(400, 263, font=("Arial", 60, "bold"))
 
 # Need to define the x position and y position (to center image)
 canvas.grid(column=0, row=0, columnspan=2)
-
-# TODO need to dynamically set front image and then switch it
-
-# Title Label
-# title_label = Label(font=("Arial", 40, "italic"), bg="white")
-# title_label.place(x=400, y=150, anchor=CENTER)
-
-# # Title Label
-# word_label = Label(font=("Arial", 60, "bold"), bg="white")
-# word_label.place(x=400, y=263, anchor=CENTER)
 
 # Incorrect Button
 incorrect_img = PhotoImage(file="images/wrong.png")
