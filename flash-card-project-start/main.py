@@ -6,52 +6,70 @@ BACKGROUND_COLOR = "#B1DDC6"
 MILLISECONDS = 3000
 timer = None
 current_words = {}
+is_front = True
 
+######################## Functions ########################
 
 def mark_incorrect():
     pass
 
 def mark_correct():
-    pass
 
-def show_card(is_front):
+    print("Mark Correct")
+    global word_data_frame
+    global word_dict
 
+    # Remove the current word from the data frame
+    word_data_frame = word_data_frame[word_data_frame["French"] != current_words["French"]]
+    # Update words to learn CSV
+    word_data_frame.to_csv("words_to_learn.csv")
+    # Update the list that is being used show the words
+    word_dict = word_data_frame.to_dict(orient="records")
+
+    count_down(show_front=True)
+
+def show_front_card():
     global current_words
+    current_words = random.choice(word_dict)
+    canvas.itemconfig(canvas_img, image=card_front_img)
+    canvas.itemconfig(canvas_title, text="French", fill="black")
+    canvas.itemconfig(canvas_word, text=current_words["French"], fill="black")
 
-    # Pick new word and show to user in French
-    if is_front is True:
+def show_back_card():
 
-        current_words = random.choice(word_dict)
-        # title_label.config(text="French", fg="black", bg="white")
-        # word_label.config(text=current_words["French"], fg="black", bg="white")
+    canvas.itemconfig(canvas_img, image=card_back_img)
+    canvas.itemconfig(canvas_title, text="English", fill="white")
+    canvas.itemconfig(canvas_word, text=current_words["English"], fill="white")
 
-        # canvas.create_text(100, 100, text="test", fill="black")
-        # canvas.create_text(150, 100, text="test2", fill="black")
-        #
-        canvas.itemconfig(canvas_img, image=card_front_img)
-        canvas.itemconfig(canvas_title, text="French", fill="black")
-        canvas.itemconfig(canvas_word, text=current_words["French"], fill="black")
+def count_down(show_front):
 
+    print(f"In count down showfront = {show_front}")
 
-    # Flip to english word and update image
+    if show_front:
+        show_front_card()
     else:
-        # title_label.config(text="English", fg="white", bg=BACKGROUND_COLOR)
-        # word_label.config(text=current_words["English"], fg="white", bg=BACKGROUND_COLOR)
-        canvas.itemconfig(canvas_img, image=card_back_img)
-        canvas.itemconfig(canvas_title, text="English", fill="white")
-        canvas.itemconfig(canvas_word, text=current_words["English"], fill="white")
-
-
-def count_down(is_front):
-    print("In count down")
-    show_card(is_front)
+        show_back_card()
 
     global timer
-    timer = window.after(MILLISECONDS, count_down, not is_front)
+    timer = window.after(MILLISECONDS, count_down, not show_front)
+
+######################## Program Start ########################
 
 # Read CSV File
-word_data_frame = pandas.read_csv("data/french_words.csv")
-word_dict = word_data_frame.to_dict(orient="records")
+try:
+    print('Set the words using the words to learn csv')
+    word_data_frame = pandas.read_csv("words_to_learn.csv")
+
+# The first time this program is run we don't have the words to learn file
+except FileNotFoundError:
+    print('File not found')
+    word_data_frame = pandas.read_csv("data/french_words.csv")
+    word_data_frame.to_csv("words_to_learn.csv")
+
+finally:
+    print('Finally')
+    word_dict = word_data_frame.to_dict(orient="records")
+
 
 # Window
 window = Tk()
@@ -91,6 +109,6 @@ correct_button = Button(image=correct_img, command=mark_correct, highlightthickn
 correct_button.grid(column=1, row=1)
 
 # Select the card to show
-count_down(True)
+count_down(show_front=True)
 
 window.mainloop()
