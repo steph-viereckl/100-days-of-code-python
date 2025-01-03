@@ -1,4 +1,5 @@
 import smtplib
+import random
 
 my_email = "stepythonie@gmail.com"
 my_password = "ytrh zxsc afqe xlvp"
@@ -33,20 +34,35 @@ import datetime as dt
 # day_of_birth = dt.datetime(year=1999, month=12, day=31, hour=1)
 # print(day_of_birth)
 
-# If the current day of the week is Monday, send a motivational quote
-if dt.datetime.now().weekday() is "Monday":
 
+def get_quote():
+    with open("quotes.txt", mode="r") as quote_file:
+        quote = random.choice(quote_file.readlines())
+        return quote
+
+def send_email(quote_for_email):
     # Object from smtp class to connect to specific provider
     with smtplib.SMTP("smtp.gmail.com") as connection:
 
-        # Open starting letter and store in variable
-        with open("", mode="r") as starting_letter:
-            invite_letter = starting_letter.read()
-
-        email_message = "Subject:Hello World\n\n"
-
+        print('Send Email')
+        email_message = f"Subject:Happy Monday!\n\n{quote_for_email}"
         connection.starttls()
         connection.login(user=my_email, password=my_password)
         connection.sendmail(from_addr=my_email,
                             to_addrs="stepythonie@yahoo.com",
                             msg=email_message)
+
+#--------- Program Start ------------#
+
+# If the current day of the week is Monday, send a motivational quote
+# Monday is 0, Friday is 4
+if dt.datetime.now().weekday() == 4:
+    quote = get_quote()
+    send_email(quote)
+
+
+
+
+
+
+
