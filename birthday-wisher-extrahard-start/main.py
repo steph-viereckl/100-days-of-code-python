@@ -62,4 +62,7 @@ current_birthdays = get_birthdays()
 for current_birthday in current_birthdays:
     send_email(current_birthday)
 
-
+# Angela's solution includes using a tuple as they key with the month and day
+today_tuple = (dt.datetime.now().month, dt.datetime.now().day,)
+data = pandas.read_csv("birthdays.csv")
+birthdays_dict = {(data_row["month"], data_row["day"]): data_row for (index, data_row) in data.itterrows()}
