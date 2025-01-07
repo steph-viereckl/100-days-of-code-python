@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4e3a7cf-f909-444a-9244-acfbfc0f2eef" name="Changes" comment="">
+    <list default="true" id="2e9cf2f4-6297-4d8a-b6b7-04444804a0c6" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/../day-34/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../quizzler-app-start/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../quizzler-app-start/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../quizzler-app-start/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../quizzler-app-start/main.py" afterDir="false" />
@@ -16,23 +16,32 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2qOnQkdOIMzkvlngHAGcc2gQDqf" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2qcp2H10zO0DupuFvsdKdrWMQeP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.lesson_notes.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -43,11 +52,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e4e3a7cf-f909-444a-9244-acfbfc0f2eef" name="Changes" comment="" />
-      <created>1734542475039</created>
+      <changelist id="2e9cf2f4-6297-4d8a-b6b7-04444804a0c6" name="Changes" comment="" />
+      <created>1734971508422</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1734542475039</updated>
+      <updated>1734971508422</updated>
     </task>
     <servers />
   </component>
