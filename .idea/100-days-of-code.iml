@@ -14,6 +14,7 @@
       <excludeFolder url="file://$MODULE_DIR$/day-24/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-26/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/NATO-alphabet-start/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/rain-alert/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (100-days-of-code)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

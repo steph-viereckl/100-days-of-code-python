@@ -14,7 +14,8 @@ import datetime as dt
 import pandas
 
 FROM_EMAIL = "stepythonie@gmail.com"
-PASSWORD = "ytrh zxsc afqe xlvp"
+# PASSWORD = "ytrh zxsc afqe xlvp" # This is old - I created a new one
+
 
 def get_letter(name):
 
@@ -55,6 +56,8 @@ def send_email(birthday):
                             to_addrs=to_email,
                             msg=email_message)
 
+        print()
+
 ########## Program Start #########
 
 current_birthdays = get_birthdays()
@@ -65,4 +68,4 @@ for current_birthday in current_birthdays:
 # Angela's solution includes using a tuple as they key with the month and day
 today_tuple = (dt.datetime.now().month, dt.datetime.now().day,)
 data = pandas.read_csv("birthdays.csv")
-birthdays_dict = {(data_row["month"], data_row["day"]): data_row for (index, data_row) in data.itterrows()}
+birthdays_dict = {(data_row["month"], data_row["day"]): data_row for (index, data_row) in data.iterrows()}
