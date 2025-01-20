@@ -9,7 +9,7 @@ from data_manager import DataManager
 
 # STEP 1: Get existing worksheet data using Sheety API
 worksheet = DataManager()
-print(f"Worksheet.data: {worksheet.data}")
+print(f"Worksheet.data : {worksheet.data}")
 
 # STEP 2: Get Access Token from Amadeus API
 flight_data = FlightData()
