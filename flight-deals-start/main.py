@@ -6,35 +6,37 @@
 
 from flight_data import FlightData
 from data_manager import DataManager
+from flight_search import FlightSearch
+from notification_manager import NotificationManager
 
 # STEP 1: Get existing worksheet data using Sheety API
 worksheet = DataManager()
-print(f"Worksheet.data : {worksheet.data}")
 
-# STEP 2: Get Access Token from Amadeus API
-flight_data = FlightData()
-flight_data.get_access_token()
+# Connect to Amadeus Flight Api
+flight_search = FlightSearch()
 
-# STEP 3: If IATA Code is blank, update it
+# Check to see if IATA city codes are blank in worksheet
 for row in worksheet.data["prices"]:
 
+    # If blank, use Flight Location API to get city IATA Code
     if row["iataCode"] == "":
-        iata_code = flight_data.get_iata_code(row["city"])
+
+        iata_code = flight_search.get_iata_code(row["city"])
         row["iataCode"] = iata_code
-        print(f"{iata_code}")
+        # Update the Worksheet with the correct code
         worksheet.update_iata_code(row)
+
+    # Otherwise, if the IATA city code is populated, skip to next city (no updates needed)
     else:
         print(f"Skip getting IATA code for {row["city"]} since it is already populated")
 
+# For the cities in the worksheet, get current flight offers
+flight_search.get_flight_offers(worksheet)
 
-# flight_data.get_flight_offers(worksheet)
-
-# TODO: Using Flight Search API, check for cheapest flights from tomorrow to 6 months from now
-
-# TODO: If price is lower than current price in Worksheet, send email
-
-
-
+# If any deals are found that are better than the current prices, send an email
+for hot_deal in flight_search.hot_deals:
+    emailer = NotificationManager()
+    emailer.send_email(hot_deal)
 
 
 

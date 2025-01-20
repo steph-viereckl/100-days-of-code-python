@@ -1,17 +1,20 @@
 import os
 import requests
+from dotenv import load_dotenv
 
-TOKEN = os.environ.get("SHEETY_TOKEN", "Sheety Bearer Token does not exist")
-ENDPOINT = os.environ.get("SHEETY_ENDPOINT", "Sheety Endpoint was not found")
+
 
 class DataManager:
 
     def __init__(self):
 
-        self.header = {"Authorization": f"Bearer {TOKEN}"}
+        load_dotenv()
+        self.token = os.environ.get("SHEETY_TOKEN", "Sheety Bearer Token does not exist")
+        self.endpoint = os.environ.get("SHEETY_ENDPOINT", "Sheety Endpoint was not found")
+        self.header = {"Authorization": f"Bearer {self.token}"}
 
         # Comment out when conserving API Calls
-        # sheety_response = requests.get(url=SHEETY_ENDPOINT, headers=self.header)
+        # sheety_response = requests.get(url=self.endpoint, headers=self.header)
         # sheety_response.raise_for_status()
         # self.data = sheety_response.json()
 
@@ -19,17 +22,19 @@ class DataManager:
         self.data = {
             "prices": [
                 {"city": "Chicago",
-                 "iataCode": "ORD",
-                 "lowestPrice": 500,
+                 "iataCode": "CHI",
+                 "lowestPrice": 1000,
                  "id": 2
                  },
                 {"city": "Los Angeles",
                  "iataCode": "LAX",
-                 "lowestPrice": 600,
+                 "lowestPrice": 1000,
                  "id": 3
                  },
             ]
         }
+
+        print(f"Worksheet data: {self.data}")
 
     # Now that we have a list of IATA codes, update the Google Worksheet
     def update_iata_code(self, row):
@@ -47,7 +52,7 @@ class DataManager:
 
             print(f"updated_data: {updated_data}")
 
-            update_iata_response = requests.put(url=f"{ENDPOINT}/{row["id"]}", json=updated_data, headers=self.header)
+            update_iata_response = requests.put(url=f"{self.endpoint}/{row["id"]}", json=updated_data, headers=self.header)
             update_iata_response.raise_for_status()
             print(update_iata_response.json())
 
