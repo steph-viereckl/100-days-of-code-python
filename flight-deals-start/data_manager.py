@@ -1,58 +1,53 @@
 import os
 import requests
 
-SHEETY_TOKEN = os.environ.get("SHEETY_TOKEN", "Sheety Bearer Token does not exist")
-SHEETY_ENDPOINT = os.environ.get("SHEETY_ENDPOINT", "Sheety Endpoint was not found")
+TOKEN = os.environ.get("SHEETY_TOKEN", "Sheety Bearer Token does not exist")
+ENDPOINT = os.environ.get("SHEETY_ENDPOINT", "Sheety Endpoint was not found")
 
-class SheetyApi():
+class DataManager:
 
     def __init__(self):
 
-        self.header = {"Authorization": f"Bearer {SHEETY_TOKEN}"}
-        self.city_list = []
-        self.worksheet_data = {}
+        self.header = {"Authorization": f"Bearer {TOKEN}"}
 
         # Comment out when conserving API Calls
         # sheety_response = requests.get(url=SHEETY_ENDPOINT, headers=self.header)
         # sheety_response.raise_for_status()
-        # self.worksheet_data = sheety_response.json()
+        # self.data = sheety_response.json()
 
         # {'prices': [{'city': 'Chicago', 'iataCode': '', 'lowestPrice': 42, 'id': 2}, {'city': 'Missoula', 'iataCode': '', 'lowestPrice': 95, 'id': 3}]}
-        self.worksheet_data = {
+        self.data = {
             "prices": [
                 {"city": "Chicago",
-                 "iataCode": "",
-                 "lowestPrice": 49,
+                 "iataCode": "ORD",
+                 "lowestPrice": 500,
                  "id": 2
                  },
-                {"city": "Missoula",
-                 "iataCode": "",
-                 "lowestPrice": 40,
+                {"city": "Los Angeles",
+                 "iataCode": "LAX",
+                 "lowestPrice": 600,
                  "id": 3
                  },
             ]
         }
 
     # Now that we have a list of IATA codes, update the Google Worksheet
-    def update_iata_codes(self, flight_data):
+    def update_iata_code(self, row):
 
-        # For each city in the worksheet
-        for row in self.worksheet_data["prices"]:
-
-            # Get a list of IATA codes from the flight data object
-            iata_list = flight_data.city_codes[row["city"]]
-            # Convert list into comma separated string
-            iata_string = ",".join(iata_list)
-            # Update data with IATA String
-            row["iataCode"] = iata_string
-            # Update the row in the sheet in a format Sheety will understand
+            # # Get a list of IATA codes from the flight data object
+            # iata_list = flight_data.city_codes[row["city"]]
+            # # Convert list into comma separated string
+            # iata_string = ",".join(iata_list)
+            # # Update data with IATA String
+            # row["iataCode"] = iata_string
+            # # Update the row in the sheet in a format Sheety will understand
             updated_data = {
                 "price": row
             }
 
             print(f"updated_data: {updated_data}")
 
-            update_iata_response = requests.put(url=f"{SHEETY_ENDPOINT}/{row["id"]}", json=updated_data, headers=self.header)
+            update_iata_response = requests.put(url=f"{ENDPOINT}/{row["id"]}", json=updated_data, headers=self.header)
             update_iata_response.raise_for_status()
             print(update_iata_response.json())
 
