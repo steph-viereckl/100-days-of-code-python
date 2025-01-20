@@ -33,6 +33,10 @@ if SKIP_WORKSHEET_UPDATE is False:
     # Update the Worksheet with the IATA Codes using Sheety APIU
     sheety_api.update_iata_codes(flight_api)
 
+# TODO: Using Flight Search API, check for cheapest flights from tomorrow to 6 months from now
+
+# TODO: If price is lower than current price in Worksheet, send email
+
 
 
 
