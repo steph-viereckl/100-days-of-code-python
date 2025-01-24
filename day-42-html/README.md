@@ -33,7 +33,7 @@ After `head` element is the `body` element
     <h1>All content and structure go inside here</h1>
 </body>
 
-# Lists
+## Lists
 
 ```html
 <!-- Unordered List will give us bullets-->
@@ -53,3 +53,12 @@ After `head` element is the `body` element
 </ol>
 ```
 
+## Anchor
+
+```html
+<a href="www.google.com">This is a link</a>
+```
+
+## Global Attribute
+
+Can be set to any html attribute.
