@@ -18,6 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/rain-alert/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/workout-tracker/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/flight-tracker/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-46-music-time-machine/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (100-days-of-code)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
