@@ -44,3 +44,69 @@ For example, to move up a folder and navigate into Desired Folder you would use 
 To move up 2 folders, do `../../Desired_Folder/file.txt`
 
 To reference something in the same folder, you can do `./file.txt` or shorthand of `file.txt`
+
+## Sending Email
+
+```python
+import smtplib
+import os
+from dotenv import load_dotenv
+
+# Object from smtp class to connect to specific provider
+with (smtplib.SMTP("smtp.gmail.com") as connection):
+
+    load_dotenv()
+    # These are stored in the .env file
+    from_email = os.environ.get("FROM_EMAIL", "From Email cannot be found")
+    email_password = os.environ.get("PASSWORD", "Email password cannot be found")
+
+    subject_line = f"Subject: Here is the subject line!\n\n"
+    message = f"Here is the message in the body of the email"
+    combined_message = subject_line + message
+    # Was running into issues with encoding so ignoring some chars
+    # updated_message = combined_message.encode('ascii', 'ignore').decode('ascii')
+    connection.starttls()
+    connection.login(user=from_email, password=email_password)
+    connection.sendmail(from_addr=from_email,to_addrs=from_email,msg=combined_message.encode("utf-8"))
+```
+
+## Open File
+
+```python
+with open("file-path.txt", mode="r") as data:
+    letter = data.read()
+```
+
+## Create new file
+
+```python
+new_file = "hello world"
+
+with open("movies-to-watch.txt", "w") as file:
+    file.write(new_file)
+```
+
+## Web Scraping
+
+```python
+from bs4 import BeautifulSoup
+import requests
+
+# Get full header here: # https://myhttpheader.com/
+header = {
+    "Accept-Language":"en-US",
+    "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+}
+
+response = requests.get(url="www.google.com", headers=header)
+website_html = response.text
+
+soup = BeautifulSoup(markup=website_html, features="html.parser")
+# Find span where class is...
+price = soup.find(name="span", class_="a-price-whole").getText()
+decimal = soup.find(name="span", class_="a-price-fraction").getText()
+movie_title_tags = soup.find_all(name="h3", class_="title")
+# Find tag where element is inside an li tag, and is an h3 element with an id of "title-of-a-story"
+song_tags = soup.select("li h3#title-of-a-story")
+
+```
