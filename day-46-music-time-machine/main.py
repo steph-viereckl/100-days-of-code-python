@@ -48,22 +48,34 @@ user_id = sp.current_user()["id"]
 song_uris = []
 
 # Use the following to create a list of 10 when testing
-for num in range(0,10):
-    song = song_list[num]
-# for song in song_list:
-    print(f"Finding song: {song}")
-    result = sp.search(q=f"track:{song} year:{year}", type="track")
-    pprint.pp(result)
+# for num in range(0,20):
+#     song = song_list[num]
+for song in song_list:
 
+    result = sp.search(q=f"track:{song} year:{year}", type="track", limit="50")
+    # pprint.pp(result)
     try:
-        song_uris.append(result["tracks"]["items"][0]["uri"])
+
+        # Using the returned songs, get the most popular (this is to try and avoid kidzbop being chosen)
+        most_popular_track = None
+        most_popular_track_popularity = 0
+
+        for track in result["tracks"]["items"]:
+            print(f"for {track["name"]} by {track["artists"][0]["name"]} has popularity of {track["popularity"]}")
+            if int(track["popularity"]) > most_popular_track_popularity:
+                most_popular_track = track
+                most_popular_track_popularity = int(track["popularity"])
+
+        # song_uris.append(result["tracks"]["items"][0]["uri"])
+        song_uris.append(most_popular_track["uri"])
+
     except:
         print("Song doesn't exist")
 
 print(song_uris)
 
 # Create a new Playlist based upon the user's inputted year
-# playlist = sp.user_playlist_create(user=user_id, public=False, name=f"Top 100 Songs in {year}", collaborative=False)
+playlist = sp.user_playlist_create(user=user_id, public=False, name=f"Top 100 Songs in {year}", collaborative=False)
 # pprint.pp(playlist)
-# sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
+sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
 
