@@ -22,6 +22,7 @@
       <excludeFolder url="file://$MODULE_DIR$/day-47-product-price-alert/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-48/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-48-cookie-clicker/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-49-linkedin-bot/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (100-days-of-code)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

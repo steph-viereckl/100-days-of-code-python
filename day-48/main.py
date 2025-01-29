@@ -9,7 +9,7 @@ chrome_options.add_experimental_option("detach", True)
 
 # Instantiate browser of choice
 driver = webdriver.Chrome(options=chrome_options)
-driver.get("https://www.python.org/")
+# driver.get("https://www.python.org/")
 
 events = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li")
 # events = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li a")
