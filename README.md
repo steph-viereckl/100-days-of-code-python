@@ -50,6 +50,7 @@ To reference something in the same folder, you can do `./file.txt` or shorthand 
 ```python
 import smtplib
 import os
+# pip install python-dotenv
 from dotenv import load_dotenv
 
 # Object from smtp class to connect to specific provider
