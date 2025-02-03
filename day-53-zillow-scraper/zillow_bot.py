@@ -27,6 +27,19 @@ def format_address(address):
     else:
         return address
 
+def format_link(link):
+
+    if "https://www.zillow.com/" in link:
+        return link
+    else:
+        return f"https://www.zillow.com{link}"
+
+def format_price(price):
+
+    price = price.replace("+", "")
+    price = price.replace("/mo", "")
+    return price.split(" ")[0]
+
 class ZillowBot:
 
     def __init__(self):
@@ -50,10 +63,10 @@ class ZillowBot:
 
         for listing in listings:
             link = listing.find(name="a")["href"]
-            formatted_link = f"https://www.zillow.com/{link}"
+            formatted_link = format_link(link)
 
             price = listing.find(name="span", class_="PropertyCardWrapper__StyledPriceLine-srp-8-107-0__sc-16e8gqd-1").getText()
-            formatted_price = price.split("+")[0]
+            formatted_price = format_price(price)
 
             address = listing.find(name="address").getText()
             formatted_address = format_address(address)
