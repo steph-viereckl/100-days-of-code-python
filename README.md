@@ -330,3 +330,7 @@ def a_function(*args):
     
 a_function(1,2,3)
 ```
+
+# Web Development
+
+Go to Chrome DevTools > Console > `document.body.contentEditable=true` and you can edit directly on the website. Save webpage html 

@@ -21,8 +21,17 @@
       <excludeFolder url="file://$MODULE_DIR$/day-46-music-time-machine/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-47-product-price-alert/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-48/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/campsite-reserver/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-48-cookie-clicker/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-49-linkedin-bot/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-50-tinder-bot/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-51-internet-twitter-bot/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-53-zillow-scraper/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-54/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-55/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-54-hello_flask/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-55-higher-lower/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-56-my-personal-site/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (100-days-of-code)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
