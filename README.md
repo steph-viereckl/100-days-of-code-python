@@ -333,4 +333,13 @@ a_function(1,2,3)
 
 # Web Development
 
-Go to Chrome DevTools > Console > `document.body.contentEditable=true` and you can edit directly on the website. Save webpage html 
+Go to Chrome DevTools > Console > `document.body.contentEditable=true` and you can edit directly on the website. Save webpage html
+
+# Bootstrap
+
+* `none` is for very narrow phones (<576px)
+* `sm` is for mobile (>576px)
+* `md` is for iPads (>768px)
+* `lg` is for laptops (>992px)
+* `xl` is for desktops (>1200px)
+* `xxl` is for tvs (>1400px)
