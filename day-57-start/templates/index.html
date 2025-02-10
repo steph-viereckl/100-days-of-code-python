@@ -5,13 +5,10 @@
     <title>My Website</title>
 </head>
 <body>
-    <h1>Hello {{ name.title() }}!</h1>
-    <h2>I think you are {{ gender }},</h2>
-    <h3>And maybe {{ age }} years old.</h3>
-<!--    <h2>Python Expression: {{ 5 * 6 }}</h2>-->
-<!--    <h2>Random Number using keyword argument: {{ num }}</h2>-->
+    <h1>Hello world!</h1>
+    <!-- url_for() is expecting function in the server   -->
+    <a href="{{ url_for('get_blog', num=3) }}">Go to Blog</a>
 </body>
 <footer>
-<!--    <p>The current year is {{ curr_year }}</p>-->
 </footer>
 </html>
