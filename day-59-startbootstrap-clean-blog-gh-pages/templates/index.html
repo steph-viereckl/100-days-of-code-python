@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+    <body>
+
+        {% include 'nav-bar.html' %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1738667379581-a02dd0f0bfe5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Stephanie's Blog</h1>
+                            <span class="subheading">A Bloggity Blog Blog</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+
+                    <!-- Loop through blog posts and create previews -->
+                    {% for post in blog_posts: %}
+
+                        <!-- Post preview-->
+                        <div class="post-preview">
+                            <a href="{{ url_for('blog_post', post_id=post.id) }}">
+                                <h2 class="post-title">{{ post.title }}</h2>
+                                <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="">{{ post.author }}</a>
+                                on {{ post.dates }}
+                            </p>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+
+                    {% endfor %}
+                
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+        {% include 'footer.html' %}
+    </body>
+</html>
+
