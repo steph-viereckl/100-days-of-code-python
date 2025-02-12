@@ -32,6 +32,7 @@
       <excludeFolder url="file://$MODULE_DIR$/day-54-hello_flask/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-55-higher-lower/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-56-my-personal-site/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-60-html-forms/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (100-days-of-code)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
