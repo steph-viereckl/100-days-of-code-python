@@ -5,6 +5,8 @@ from wtforms.validators import DataRequired
 import os
 from dotenv import load_dotenv
 from my_form import LoginForm
+from flask_bootstrap import Bootstrap4
+
 
 '''
 Red underlines? Install the required packages first: 
@@ -20,6 +22,7 @@ This will install the packages from requirements.txt for this project.
 '''
 
 app = Flask(__name__)
+bootstrap = Bootstrap4(app)
 # Get Secret Key from env file
 load_dotenv()
 app.secret_key = os.environ.get("SECRET_KEY", "Secret Key cannot be found")
