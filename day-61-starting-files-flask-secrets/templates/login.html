@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+        <div class="container">
+		<h1>Login</h1>
+			<form method="POST" action="{{ url_for('login_page') }}" novalidate>
+				{{ form.csrf_token }}
+				<!-- Name Input	-->
+				<p>
+					{{ form.email.label }}<br>{{ form.email(size=30) }}
+					{% for err in form.email.errors %}
+					<span style="color: red">{{ err }}</span>
+					{% endfor %}
+
+				</p>
+				<!-- Password Input	-->
+				<p>
+					{{ form.password.label }}<br>{{ form.password(size=30) }}
+					{% for err in form.password.errors %}
+					<span style="color: red">{{ err }}</span>
+					{% endfor %}
+				</p>
+				<!-- Submit Button	-->
+				{{ form.submit}}
+			</form>
+        </div>
+	</body>
+</html>
