@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h1>All Cafes</h1>
+
+
+	  <table class="table table-hover custom-table">
+
+        <tbody>
+            {% for cafe in cafes %}
+            <tr>
+
+                {% for data in cafe %}
+
+                    {% if data.startswith('https') %}
+                        <td colspan="2"><a href="{{ data }}">Maps Link</a></td>
+                    {% else %}
+                        <td colspan="2">{{ data }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+
+
+            {% endfor %}
+
+<!--            -->
+        </tbody>
+      </table>
+      <p><a href="{{ url_for('home') }}">Return to index page</a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
