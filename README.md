@@ -343,3 +343,7 @@ Go to Chrome DevTools > Console > `document.body.contentEditable=true` and you c
 * `lg` is for laptops (>992px)
 * `xl` is for desktops (>1200px)
 * `xxl` is for tvs (>1400px)
+
+# Installing Requirements
+
+You can create a file with your `requirements.txt` and then use `pip install -r ./requirements.txt` to install them 
