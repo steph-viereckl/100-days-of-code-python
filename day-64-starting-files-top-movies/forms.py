@@ -8,7 +8,7 @@ class EditMovieForm(FlaskForm):
     review = StringField('Your Review', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-class AddMovieForm(FlaskForm):
+class MovieSearchForm(FlaskForm):
 
-    title = FloatField('Movie Title', validators=[DataRequired()])
+    title = StringField('Movie Title', validators=[DataRequired()])
     submit = SubmitField('Add Movie')

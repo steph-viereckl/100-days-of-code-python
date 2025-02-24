@@ -3,7 +3,11 @@ from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Float
-from forms import EditMovieForm, AddMovieForm
+from forms import EditMovieForm, MovieSearchForm
+from movie_api import MovieFinder
+import json
+import ast
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -82,22 +86,51 @@ def delete_movie():
 
     return redirect(url_for('home'))
 
-@app.route("/add", methods=["GET", "POST"])
-def add_movie():
+@app.route("/search", methods=["GET", "POST"])
+def search_movies():
 
-    add_form = AddMovieForm()
+    search_form = MovieSearchForm()
 
-    # It is a post method when user clicks "submit" on the edit page
-    if add_form.validate_on_submit():
+    # Once user enters in movie title and clicks Submit
+    if search_form.validate_on_submit():
         print(f"Validate on submit")
         # GET MOVIE FROM WTF FORM
-        movie_title = add_form.title.data
-
-        return redirect(url_for('home'))
+        movie_title = search_form.title.data
+        # CALL MOVIE API TO FIND MATCHING MOVIES
+        movie_finder = MovieFinder(title_to_search=movie_title)
+        return render_template("select.html", movie_results=movie_finder.search_results)
 
     # It is a get method when the user initially clicks the "update" button and needs to be redirected to update page
     else:
-        return render_template("add.html", form=add_form)
+        return render_template("add.html", form=search_form)
+
+
+@app.route("/add", methods=["GET", "POST"])
+def add_movie():
+
+    movie = request.args.get('selected_movie')
+    movie_dict = ast.literal_eval(movie)
+
+    new_movie = Movie(
+        title=movie_dict["title"],
+        year=movie_dict["release_date"][:4],
+        description=movie_dict["overview"],
+        rating=round(movie_dict["vote_average"],1),
+        ranking=10,
+        review="Test review here",
+        img_url=f"https://image.tmdb.org/t/p/original{movie_dict["poster_path"]}"
+    )
+
+    db.session.add(new_movie)
+    db.session.commit()
+    print(f"new movie id: {new_movie.id}")
+    return redirect(url_for('update_movie', id=new_movie.id))
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
