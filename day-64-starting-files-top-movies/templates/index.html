@@ -17,8 +17,8 @@
         <div class="card">
 
             <!-- Front of card with image -->
-            <div class="front" style="background-image: url('https://www.shortlist.com/media/images/2019/05/the-30-coolest-alternative-movie-posters-ever-2-1556670563-K61a-column-width-inline.jpg');">
-                <p class="large">1</p>
+            <div class="front" style="background-image: url( {{ movie.img_url }} );">
+                <p class="large">{{ movie.ranking }}</p>
             </div>
 
             <!-- Back of card with image -->
@@ -31,8 +31,8 @@
                     </div>
                     <p class="review">"{{ movie.review }}"</p>
                     <p class="overview">{{ movie.description }}</p>
-                    <a href="#" class="button">Update</a>
-                    <a href="#" class="button delete-button">Delete</a>
+                    <a href="{{ url_for('update_movie', id=movie.id) }}" class="button">Update</a>
+                    <a href="{{ url_for('delete_movie', id=movie.id) }}" class="button delete-button">Delete</a>
                 </div>
             </div>
         </div>
