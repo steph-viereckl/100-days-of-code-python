@@ -346,4 +346,86 @@ Go to Chrome DevTools > Console > `document.body.contentEditable=true` and you c
 
 # Installing Requirements
 
-You can create a file with your `requirements.txt` and then use `pip install -r ./requirements.txt` to install them 
+You can create a file with your `requirements.txt` and then use `pip install -r ./requirements.txt` to install them
+
+# Flask URL Paths
+
+## Variable Path
+A Variable path is what is typed into the url. We can then grab that vasriable
+
+```python
+@app.route('/greeting/<name>')
+def show_greeting(name):
+    return f"The name is: {name}"
+
+@app.route('/age/<int:num>')
+def show_age(num):
+    return f"The age is: {num}"
+
+```
+
+## POST Request with Flask Server
+
+We can recieve data entered by user using Flask. Once form is submitted, we can catch the POST request in our server. To do this, we need an input in our form using the `name` attribute
+```html
+<form action="{{ url_for('login') }}" method="post">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Name">
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password" placeholder="Password">
+      <input type="submit" value="Ok">
+    </form>
+```
+
+The `name` attribute identifies what data point you are going to get from the form
+
+```python
+from flask import Flask, render_template, request
+
+@app.route('/login', methods=['POST'])
+def login_page():
+    print(f'name: {request.form["name"]}')
+    print(f'password: {request.form["password"]}')
+
+    return render_template("login.html", name=request.form["name"])
+
+```
+
+## WTF Forms
+
+We saw that when using a basic HTML form, we can use the request object from Flask to access the key-value pairs that were entered into the form when the POST request was made.
+
+With WTForms, it's even easier to get hold of the form data. All you have to do is to tap into the
+
+`<form_object>.<form_field>.data`
+
+```html
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <div class="container">
+    <h1>Login</h1>
+        {{ render_form(form) }}
+    </div>
+{% endblock %}
+```
+
+```python
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField(label="Log In")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    login_form = LoginForm()
+    if login_form.validate_on_submit():
+        if login_form.email.data == "admin@email.com" and login_form.password.data == "12345678":
+            return render_template("success.html")
+        else:
+            return render_template("denied.html")
+    return render_template("login.html", form=login_form)
+
+```
+
