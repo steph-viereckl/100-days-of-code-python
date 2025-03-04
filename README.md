@@ -1,6 +1,6 @@
 # 100 Days of Code (Python)
 
-### Days Completed: 60 🎉 Days Remaining: 40
+### Days Completed: 69 🎉 Days Remaining: 31
 
 ___
 
