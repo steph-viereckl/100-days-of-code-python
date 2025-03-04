@@ -107,15 +107,18 @@ def is_logged_in():
         return False
 
 def is_admin():
+
     if current_user.get_id() == "1":
+        print(f"User is admin")
         return True
     else:
+        print(f"User is NOT admin")
         return False
 
 def admin_only(function):
     @wraps(function)
     def decorated_function(*args, **kwargs):
-        if current_user.get_id() == "1":
+        if is_admin():
             return function(*args, **kwargs)
         else:
             return abort(403)
@@ -206,7 +209,6 @@ def login():
         # Otherwise, check if password is correct
         elif check_password_hash(user.password, password):
             login_user(user)
-            flash('You were successfully logged in')
             return redirect(url_for('get_all_posts'))
 
         else:
@@ -231,15 +233,47 @@ def logout():
 def load_user(user_id):
     return db.get_or_404(User, user_id)
 
-@app.route("/post/<int:post_id>")
-@login_required
+@app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def show_post(post_id):
 
-    comment_form = CommentForm()
-    requested_post = db.get_or_404(BlogPost, post_id)
+        comment_form = CommentForm()
+        requested_post = db.get_or_404(BlogPost, post_id)
 
-    return render_template("post.html", post=requested_post, logged_in=is_logged_in(), form=comment_form)
+        # Find user by email entered.
+        result = db.session.execute(db.select(Comment).where(Comment.post_id == requested_post.id))
+        comments = result.scalars().all()
+        print(f"In show post, get comments: {comments}")
 
+        # GET requests mean user is reading blog post
+        if request.method == "GET":
+            return render_template("post.html", post=requested_post, logged_in=is_logged_in(), form=comment_form, comments=comments, is_admin=is_admin())
+
+        # POST requests mean a comment has been made
+        elif request.method == "POST":
+
+            # Only users that are logged in can comment on posts
+            if is_logged_in():
+
+                new_comment = Comment(
+                    text=comment_form.body.data,
+                    parent_post=requested_post,
+                    author_id=current_user.get_id()
+                )
+
+                print(f"New Comment: {new_comment}")
+                db.session.add(new_comment)
+                db.session.commit()
+
+                # Reset comment form
+                comment_form.text = None
+
+                # TODO probably need to reset comment form
+                return redirect(url_for('show_post', logged_in=is_logged_in(), post_id=post_id))
+
+            # User is not logged in. Redirect to login page to comment.
+            else:
+                flash('Must be logged in to comment on posts')
+                return redirect(url_for('login', logged_in=is_logged_in()))
 
 @app.route("/new-post", methods=["GET", "POST"])
 @admin_only
@@ -285,9 +319,21 @@ def edit_post(post_id):
 @app.route("/delete/<int:post_id>")
 @admin_only
 def delete_post(post_id):
+
+    print("Before delete comments")
+    result = db.session.execute(db.select(Comment).where(Comment.post_id == post_id))
+    comments_to_delete = result.scalars().all()
+
+    for comment in comments_to_delete:
+        db.session.delete(comment)
+        db.session.commit()
+
+    print("After  delete comments")
+
     post_to_delete = db.get_or_404(BlogPost, post_id)
     db.session.delete(post_to_delete)
     db.session.commit()
+
     return redirect(url_for('get_all_posts', logged_in=is_logged_in()))
 
 
@@ -302,4 +348,4 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5004)
+    app.run(debug=True, port=5005)
