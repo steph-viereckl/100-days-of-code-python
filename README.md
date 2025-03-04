@@ -429,3 +429,46 @@ def login():
 
 ```
 
+# Git & Version control
+
+## Terminal Commands
+
+`ls -a` shows hidden files like `.git`
+`touch file_name.txt` creates files
+`mkdir` creates a folder 
+`clear` clears the terminal
+
+1. Create file
+2. `git init` initializes a Git repo
+   3. "Working Directory" is the top folder
+4. Need to add to staging area. `git status` tells us what is staged.
+5. `git add file_name.txt` adds to the staging area
+   6.   `git add .` adds everything inside the working directory
+6. `git commit -m "Message"` creates a commit 
+   7. Git messages are always written in present test. "Complete Chapter 1" instead of "Completed Chpater 1"
+8. `git log` shows commit history
+   9.    `HEAD --> master` shows where you currently are at
+10. `git diff chapter3.txt` to see differences
+    11. This will help you determine whether you just need to
+12. `git checkout chapter3.txt` will roll back to last version that was committed
+
+## Remote Repositories
+
+Use GitHub 
+
+1. Need to tell computer that you want to add a remote repo
+
+`git remote add origin https://github.com/steph-viereckl/Story.git`
+
+`origin` is the remote repository and can be called anything but that is the convention.
+
+`git push -u origin main` pushes the local repo to the remote using the `u` flag to link up.
+
+### .GitIgnore
+
+`.gitignore` 
+
+DS Store files are settings files, for example, how you like to have your files shown (i.e. in a grid)
+
+1. Create a new file called `.gitignore`
+2. Use `ls -a` to see hidden files
