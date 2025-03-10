@@ -492,3 +492,17 @@ Pull down from remote to your own local working directory. You make a copy on yo
 ## VSCODE Python
 
 Python > Create Environment > Venv > Install requirements
+
+# WSGI
+
+WSGI stands for Web Server Gateway Interface and it's described here: https://www.python.org/dev/peps/pep-3333/
+
+In summary: normal web servers can't run Python applications, so a special type of server was created (WSGI) to run our Flask app.  Essentially, a WSGI server standardises the language and protocols between our Python Flask application and the host server.
+
+There are many WSGIs to choose from, but we'll use the most popular - gunicorn. That way our hosting provider will call gunicorn to run our code.
+
+1. Create file called `Procfile`
+2. Add `web: gunicorn main:app`
+   3. This tells hosting provider to create a `web` worker that is able to receive HTTP Requests.
+   4. The `Procfile` also says to use `gunicorn` to serve your web app. 
+   5. And finally it specifies the Flask `app` object is the `main.py` file. That way the hosting provider knows about the entry point for the app and what our app is called.
