@@ -1,4 +1,5 @@
 # Requirement versions working as of 2/28/2025
+# pip install -r ./requirements.txt
 Bootstrap_Flask==2.3.3
 Flask_CKEditor==0.4.6
 WTForms==3.0.1

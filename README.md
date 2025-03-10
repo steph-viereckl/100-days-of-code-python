@@ -437,6 +437,7 @@ def login():
 `touch file_name.txt` creates files
 `mkdir` creates a folder 
 `clear` clears the terminal
+`open -a /Applications/Visual\ Studio\ Code.app file-name.txt` to open 
 
 1. Create file
 2. `git init` initializes a Git repo
@@ -451,6 +452,7 @@ def login():
 10. `git diff chapter3.txt` to see differences
     11. This will help you determine whether you just need to
 12. `git checkout chapter3.txt` will roll back to last version that was committed
+13. `git rm --cached -r .` remove everything from the staging area
 
 ## Remote Repositories
 
@@ -470,5 +472,23 @@ Use GitHub
 
 DS Store files are settings files, for example, how you like to have your files shown (i.e. in a grid)
 
-1. Create a new file called `.gitignore`
+1. Create a new file called `.gitignore` (must be exactly typed)
 2. Use `ls -a` to see hidden files
+```txt
+.DS_Store
+.gitignore
+secrets.txt
+
+# There are certain rules in the .gitignore
+
+# You can also use wildcard, for example to ignore all .txt files
+*.txt
+```
+
+## Git Clone
+
+Pull down from remote to your own local working directory. You make a copy on your on environment
+
+## VSCODE Python
+
+Python > Create Environment > Venv > Install requirements
