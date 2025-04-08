@@ -1,7 +1,6 @@
 from turtle import Turtle
 import random
 
-
 LOW = 10
 MEDIUM = 20
 HIGH = 30
@@ -17,7 +16,7 @@ class Ball(Turtle):
         self.setposition(0, -400)
         self.setheading(90)
         self.showturtle()
-        self.speed = 10
+        self.speed = 20
         self.buffer = 20
 
         # Always start with ball moving up
@@ -25,9 +24,11 @@ class Ball(Turtle):
         # Randomly start ball going right or left
         self.go_right = random.choice([True, False])
 
-        # Test ball immediately coming at paddle
-        self.go_up = False
-        self.setposition(0, -200)
+        # # Test ball immediately coming at paddle
+        # # self.go_up = False
+        # self.setposition(-580, 160)
+        # self.go_right = False
+
 
     def move(self):
 
@@ -44,4 +45,9 @@ class Ball(Turtle):
             new_y = self.ycor() - self.speed
 
         self.goto(new_x, new_y)
+
+    def bounce(self):
+
+        self.go_up = not self.go_up
+        self.go_right = not self.go_right
 

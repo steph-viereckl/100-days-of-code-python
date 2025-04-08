@@ -37,6 +37,7 @@
       <excludeFolder url="file://$MODULE_DIR$/day-84-tic-tac-toe/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-85-watermarker/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/day-86-type-speed-checker/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/day-87-breakout/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (100-days-of-code)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

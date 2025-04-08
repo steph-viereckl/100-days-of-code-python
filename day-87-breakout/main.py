@@ -1,18 +1,14 @@
-# TODO Create Bricks
-# TODO Make Ball Hit Brick and Break Brick.
-# TODO When bigger bricks are hit, speed increases
-# TODO Create Scoreboard and increase score
-# TODO When user loses, they have 3 lives and then game over
 
 #--------------- Imports -----------------#
 from turtle import Screen, Turtle
 from ball import Ball
 from paddle import Paddle
+from builder import Builder
 import time
 
 #--------------- Constants -----------------#
 
-SCREEN_WIDTH = 1500
+SCREEN_WIDTH = 1605
 SCREEN_HEIGHT = 1000
 X_COR_WIDTH = int(SCREEN_WIDTH / 2)
 Y_COR_HEIGHT = int(SCREEN_HEIGHT / 2)
@@ -32,6 +28,8 @@ screen.listen()
 ball = Ball()
 # Setup Paddle
 paddle = Paddle(SCREEN_WIDTH, SCREEN_HEIGHT)
+# Create wall of bricks
+wall = Builder()
 
 game_is_on = True
 
@@ -56,23 +54,52 @@ while game_is_on:
     if ball.xcor() <= -(X_COR_WIDTH - ball.buffer):
         ball.go_right = True
 
+    y_buffer = 33
+    x_buffer = 88
+
+    # TODO Increase speed of ball when a new "row" is hit
+    for brick in wall.bricks:
+
+        x_lower_range = brick.xcor() - x_buffer
+        x_higher_range = brick.xcor() + x_buffer
+        y_lower_range = brick.ycor() - y_buffer
+        y_higher_range = brick.ycor() + y_buffer
+
+        # TODO need to improve so if we hit the side of a brick it bounces
+        if (x_lower_range <= ball.xcor() <= x_higher_range) and (y_lower_range <= ball.ycor() <= y_higher_range):
+            ball.bounce()
+            brick.hideturtle()
+            wall.bricks.remove(brick)
+            break
+
+    # Ball is at paddle/ground level
     if ball.ycor() <= -440:
 
-        print(f"Ball is at {ball.xcor()}")
-
-        left_paddle_edge = paddle.xcor() - 150
-        right_paddle_edge = paddle.xcor() + 150
+        # Get the edges of the paddle
+        left_paddle_edge = paddle.xcor() - 175
+        right_paddle_edge = paddle.xcor() + 175
         print(f"Paddle between {left_paddle_edge} and {right_paddle_edge}")
 
+        # Hit the paddle!
         if left_paddle_edge < ball.xcor() < right_paddle_edge:
-            print("Between!")
+
             ball.go_up = True
-            ball.go_right = not ball.go_right
+
+            # If the ball hit the left side of the paddle, bounce to the left
+            if ball.xcor() < paddle.xcor():
+                ball.go_right = False
+            # If the ball hit the right side of the paddle, bounce to the right
+            else:
+                ball.go_right = True
+
+        # Miss the paddle
+        else:
+            print("You lose!")
+            # TODO if ball hits floor lose a point
+            ball.bounce() # Just bounce right now so we can keep playing
+            # game_is_on = False
 
     # Move paddle based on user's mouse
     paddle.move(paddle.screen.cv.winfo_pointerx())
-
-
-
 
 screen.exitonclick()
